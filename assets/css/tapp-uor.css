@@ -1,0 +1,89 @@
+ 
+/* =========================================================
+   TAPP UOR — Admin styles (inline edit UX)
+   ========================================================= */
+
+/* ---- Base spacing / filters ---- */
+.tapp-uor-fields .form-row { margin-bottom: 12px; }
+.tapp-filters { margin-bottom: 12px; display: flex; gap: 8px; align-items: center; }
+.tapp-filters input[type="search"] { width: 240px; }
+details summary { cursor: pointer; }
+
+/* ---- Tables ---- */
+.tapp-inline-table { width: 100%; }
+.tapp-inline-table th,
+.tapp-inline-table td { vertical-align: middle; }
+.tapp-inline-table .column-actions { white-space: nowrap; width: 420px; }
+
+/* ---- Inputs inside table cells ---- */
+.tapp-inline-row .regular-text { width: 100%; max-width: 420px; }
+.tapp-inline-row select { max-width: 260px; }
+.tapp-switch input[type="checkbox"] { margin-right: 8px; }
+
+/* ---- Actions area ---- */
+.tapp-row-update { margin-right: 6px; }
+.tapp-inline-delete { display: inline; margin-left: 6px; }
+
+/* =========================================================
+   VIEW ↔ EDIT BEHAVIOR (default = VIEW)
+   Toggle .is-edit on <tr class="tapp-row"> via JS
+   ========================================================= */
+
+/* VIEW (no .is-edit) */
+.tapp-row:not(.is-edit) .edit-field { display: none; }
+.tapp-row:not(.is-edit) .tapp-row-cancel { display: none; }
+.tapp-row:not(.is-edit) .tapp-row-edit { display: inline-block; }
+
+/* EDIT (.is-edit present) */
+
+.tapp-row.is-edit .view-value { display: none; }
+.tapp-row.is-edit .edit-field { display: inline-block; }
+.tapp-row.is-edit .tapp-row-update,
+.tapp-row.is-edit .tapp-row-cancel { display: inline-block; }
+.tapp-row.is-edit .tapp-row-edit { display: none; }
+
+/* Keep view values aligned nicely */
+.tapp-row .view-value {
+  display: inline-block;
+  min-height: 28px;
+  line-height: 28px;
+}
+
+/* =========================================================
+   Add form UX
+   ========================================================= */
+
+/* Optional: slightly dim disabled controls in the add form */
+#tapp-dept-select:disabled,
+.tapp-add-row input:disabled,
+.tapp-add-row select:disabled,
+.tapp-add-row button:disabled,
+.tapp-add-row input[type="submit"]:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 782px) {
+  .tapp-inline-table .column-actions { width: auto; }
+  .tapp-inline-row .regular-text,
+  .tapp-inline-row select { max-width: 100%; }
+}
+
+/* Subtle validation cue while in EDIT */
+.tapp-row.is-edit .edit-field:invalid {
+  box-shadow: 0 0 0 1px #d63638; /* WP error red */
+}
+.tapp-row.is-edit .edit-field:invalid:focus {
+  outline: 2px solid #d63638;
+  outline-offset: 1px;
+}
+
+/* WP Admin: keep our selects a reasonable width */
+.form-table select.tapp-company,
+.form-table select.tapp-dept,
+.form-table select.tapp-role {
+  min-width: 18rem;   /* ~288px */
+  width: 24rem;       /* ~384px; adjust to taste */
+  max-width: 100%;
+}
